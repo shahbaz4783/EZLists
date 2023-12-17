@@ -5,6 +5,8 @@ import {
 	View,
 	TextInput,
 	TouchableOpacity,
+	ScrollView,
+	FlatList,
 } from 'react-native';
 
 export default function App() {
@@ -16,10 +18,10 @@ export default function App() {
 	};
 
 	const buttonHandler = () => {
-		setAllText((currTexts) => {
-			return [...currTexts, enteredText];
-		});
+		setAllText((currTexts) => [...currTexts, enteredText]);
+		setEnteredText('');
 	};
+
 
 	return (
 		<View style={styles.container}>
@@ -28,17 +30,27 @@ export default function App() {
 					style={styles.input}
 					placeholder='Enter Your Goals'
 					onChangeText={inputHandler}
+					value={enteredText}
 				/>
 				<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
 					<Text style={styles.buttonText}>Add</Text>
 				</TouchableOpacity>
 			</View>
 			<View style={styles.textContainer}>
-				{allText.map((text, index) => (
-					<Text style={styles.textContent} key={index}>
-						{index + 1} {text}
-					</Text>
-				))}
+				<FlatList
+					data={allText}
+					renderItem={(itemData) => {
+						return (
+							<Text style={styles.textContent}>
+								{itemData.index + 1} {itemData.item}
+							</Text>
+						);
+					}}
+					keyExtractor={(item, index) => {
+						return index.toString();
+					}}
+					alwaysBounceVertical={false}
+				/>
 			</View>
 		</View>
 	);
@@ -48,6 +60,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		margin: 24,
+		gap: 24,
 		// borderWidth: 2,
 		// borderColor: 'blue',
 	},
@@ -58,6 +71,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		gap: 24,
 		flex: 2,
+		borderBottomWidth: 1,
+		borderBottomColor: 'grey',
 	},
 	input: {
 		flex: 1,
@@ -65,6 +80,7 @@ const styles = StyleSheet.create({
 		borderColor: 'grey',
 		padding: 12,
 		fontSize: 18,
+		borderRadius: 6,
 	},
 	customButton: {
 		backgroundColor: 'green',
@@ -81,11 +97,13 @@ const styles = StyleSheet.create({
 		overflow: 'scroll',
 		gap: 10,
 	},
+
 	textContent: {
 		backgroundColor: 'blue',
 		color: 'white',
 		padding: 16,
 		borderRadius: 6,
 		fontSize: 18,
+		margin: 10,
 	},
 });
