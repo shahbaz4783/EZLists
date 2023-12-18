@@ -6,6 +6,7 @@ import {
 	TextInput,
 	TouchableOpacity,
 	Modal,
+	Image,
 } from 'react-native';
 
 export const InputContainer = ({ onButtonPress, visible, onCancel }) => {
@@ -23,10 +24,12 @@ export const InputContainer = ({ onButtonPress, visible, onCancel }) => {
 	return (
 		<Modal visible={visible} animationType='slide'>
 			<View style={styles.inputContainer}>
-				<View>
+				<Image style={styles.image} source={require('../assets/list.png')} />
+				<View style={styles.inputWrapper}>
 					<TextInput
 						style={styles.input}
-						placeholder='Enter Your Goals'
+						placeholder='Enter a List Item'
+						placeholderTextColor='#264653'
 						onChangeText={inputHandler}
 						value={enteredText}
 					/>
@@ -50,20 +53,28 @@ const styles = StyleSheet.create({
 		flex: 2,
 		borderBottomWidth: 1,
 		borderBottomColor: 'grey',
-		borderWidth: 2,
-		borderColor: 'red',
 		justifyContent: 'center',
+		backgroundColor: '#2a9d8f',
 	},
-	input: {
-		flex: 1,
+	inputWrapper: {
+		color: 'white',
+		backgroundColor: '#fefae0',
 		borderWidth: 2,
 		borderColor: 'grey',
-		padding: 12,
-		fontSize: 18,
+		padding: 20,
 		borderRadius: 6,
+		margin: 20,
+	},
+	input: {
+		fontSize: 20,
+	},
+	image: {
+		width: 150,
+		height: 150,
+		margin: 'auto',
 	},
 	customButton: {
-		backgroundColor: 'navy',
+		backgroundColor: '#264653',
 		padding: 10,
 		borderRadius: 5,
 	},
@@ -73,8 +84,6 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 	buttonContainer: {
-		borderWidth: 2,
-		borderColor: 'black',
 		flexDirection: 'row',
 		justifyContent: 'center',
 		gap: 24,
