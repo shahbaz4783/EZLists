@@ -8,7 +8,7 @@ import {
 	Modal,
 } from 'react-native';
 
-export const InputContainer = ({ onButtonPress, visible }) => {
+export const InputContainer = ({ onButtonPress, visible, onCancel }) => {
 	const [enteredText, setEnteredText] = useState('');
 
 	const inputHandler = (e) => {
@@ -21,17 +21,24 @@ export const InputContainer = ({ onButtonPress, visible }) => {
 	};
 
 	return (
-		<Modal style={styles.modal} visible={visible} animationType='slide' >
+		<Modal visible={visible} animationType='slide'>
 			<View style={styles.inputContainer}>
-				<TextInput
-					style={styles.input}
-					placeholder='Enter Your Goals'
-					onChangeText={inputHandler}
-					value={enteredText}
-				/>
-				<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
-					<Text style={styles.buttonText}>Add</Text>
-				</TouchableOpacity>
+				<View>
+					<TextInput
+						style={styles.input}
+						placeholder='Enter Your Goals'
+						onChangeText={inputHandler}
+						value={enteredText}
+					/>
+				</View>
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
+						<Text style={styles.buttonText}>Add</Text>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={onCancel} style={styles.customButton}>
+						<Text style={styles.buttonText}>Cancel</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</Modal>
 	);
@@ -39,19 +46,13 @@ export const InputContainer = ({ onButtonPress, visible }) => {
 
 const styles = StyleSheet.create({
 	inputContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
 		gap: 24,
 		flex: 2,
 		borderBottomWidth: 1,
 		borderBottomColor: 'grey',
-	},
-	modal: {
 		borderWidth: 2,
 		borderColor: 'red',
-		backgroundColor: 'red',
-		width: 100,
+		justifyContent: 'center',
 	},
 	input: {
 		flex: 1,
@@ -62,12 +63,20 @@ const styles = StyleSheet.create({
 		borderRadius: 6,
 	},
 	customButton: {
-		backgroundColor: 'green',
+		backgroundColor: 'navy',
 		padding: 10,
 		borderRadius: 5,
 	},
 	buttonText: {
 		color: 'white',
 		padding: 8,
+		fontSize: 20,
+	},
+	buttonContainer: {
+		borderWidth: 2,
+		borderColor: 'black',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		gap: 24,
 	},
 });

@@ -11,8 +11,13 @@ export default function App() {
 		setIsVisible(true);
 	};
 
+	const modalInVisible = () => {
+		setIsVisible(false);
+	};
+
 	const buttonHandler = (enteredText) => {
 		setAllText((currTexts) => [...currTexts, enteredText]);
+		modalInVisible();
 	};
 
 	const deleteItem = (index) => {
@@ -25,7 +30,7 @@ export default function App() {
 		<View style={styles.container}>
 			<Button title='Add an Item' onPress={modalVisible} />
 
-			<InputContainer visible={isVisible} onButtonPress={buttonHandler} />
+			<InputContainer visible={isVisible} onButtonPress={buttonHandler} onCancel={modalInVisible} />
 
 			<View style={styles.textContainer}>
 				<FlatList
