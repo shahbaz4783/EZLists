@@ -1,10 +1,10 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Pressable } from 'react-native';
 
-export const ListItem = ({ text }) => {
+export const ListItem = ({ text, onDelete, index }) => {
   return (
-		<Text style={styles.textContent}>
-			{text}
-		</Text>
+		<Pressable onPress={() => onDelete(index)}>
+			<Text style={styles.textContent}>{text}</Text>
+		</Pressable>
 	);
 }
 

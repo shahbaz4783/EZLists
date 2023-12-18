@@ -10,6 +10,12 @@ export default function App() {
 		setAllText((currTexts) => [...currTexts, enteredText]);
 	};
 
+	const deleteItem = (index) => {
+		setAllText((currTexts) => {
+			return currTexts.filter((item, idx) => idx !== index);
+		});
+	};
+
 	return (
 		<View style={styles.container}>
 			<InputContainer onButtonPress={buttonHandler} />
@@ -17,7 +23,7 @@ export default function App() {
 				<FlatList
 					data={allText}
 					renderItem={(itemData) => {
-						return <ListItem text={itemData.item} />;
+						return <ListItem text={itemData.item} index={itemData.index} onDelete={deleteItem} />;
 					}}
 					keyExtractor={(item, index) => {
 						return index.toString();
