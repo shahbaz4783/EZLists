@@ -5,9 +5,10 @@ import {
 	View,
 	TextInput,
 	TouchableOpacity,
+	Modal,
 } from 'react-native';
 
-export const InputContainer = ({ onButtonPress }) => {
+export const InputContainer = ({ onButtonPress, visible }) => {
 	const [enteredText, setEnteredText] = useState('');
 
 	const inputHandler = (e) => {
@@ -20,17 +21,19 @@ export const InputContainer = ({ onButtonPress }) => {
 	};
 
 	return (
-		<View style={styles.inputContainer}>
-			<TextInput
-				style={styles.input}
-				placeholder='Enter Your Goals'
-				onChangeText={inputHandler}
-				value={enteredText}
-			/>
-			<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
-				<Text style={styles.buttonText}>Add</Text>
-			</TouchableOpacity>
-		</View>
+		<Modal style={styles.modal} visible={visible} animationType='slide' >
+			<View style={styles.inputContainer}>
+				<TextInput
+					style={styles.input}
+					placeholder='Enter Your Goals'
+					onChangeText={inputHandler}
+					value={enteredText}
+				/>
+				<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
+					<Text style={styles.buttonText}>Add</Text>
+				</TouchableOpacity>
+			</View>
+		</Modal>
 	);
 };
 
@@ -43,6 +46,12 @@ const styles = StyleSheet.create({
 		flex: 2,
 		borderBottomWidth: 1,
 		borderBottomColor: 'grey',
+	},
+	modal: {
+		borderWidth: 2,
+		borderColor: 'red',
+		backgroundColor: 'red',
+		width: 100,
 	},
 	input: {
 		flex: 1,
