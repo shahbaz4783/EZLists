@@ -3,13 +3,14 @@ import {
 	Text,
 	View,
 	FlatList,
-	Button,
 	SafeAreaView,
 	TouchableOpacity,
+	Image,
 } from 'react-native';
 import { useState } from 'react';
 import { InputContainer } from './components/InputContainer';
 import { ListItem } from './components/ListItem';
+import { Greet } from './components/Greet';
 
 export default function App() {
 	const [allText, setAllText] = useState([]);
@@ -34,27 +35,11 @@ export default function App() {
 		});
 	};
 
-	const daysOfWeek = [
-		'Sunday',
-		'Monday',
-		'Tuesday',
-		'Wednesday',
-		'Thursday',
-		'Friday',
-		'Saturday',
-	];
-	const dayName = daysOfWeek[new Date().getDay()];
-	const getDate = new Date().getDate();
-	const getMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
-
 	return (
 		<SafeAreaView style={styles.container}>
-			<View>
-				<Text style={styles.logo}>EZ List</Text>
-
-				<Text style={styles.date}>
-					{dayName}, {getDate} {getMonth}
-				</Text>
+			<View style={styles.header}>
+				<Image style={styles.image} source={require('./assets/list.png')} />
+				<Greet />
 			</View>
 
 			<InputContainer
@@ -95,9 +80,12 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		gap: 24,
-		// borderWidth: 2,
-		// borderColor: 'red',
 		marginTop: 56,
+	},
+	header: {
+		flexDirection: 'row',
+		backgroundColor: 'whitesmoke',
+		alignItems: 'center',
 	},
 	textContainer: {
 		flex: 5,
@@ -108,13 +96,11 @@ const styles = StyleSheet.create({
 	logo: {
 		fontSize: 28,
 		fontWeight: '700',
-		marginHorizontal: 20,
 	},
 	date: {
 		fontSize: 18,
 		fontWeight: '700',
 		color: 'grey',
-		marginHorizontal: 20,
 	},
 	customButton: {
 		backgroundColor: '#264653',
@@ -132,5 +118,10 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		color: 'gray',
 		fontStyle: 'italic',
+	},
+	image: {
+		width: 150,
+		height: 150,
+		margin: 'auto',
 	},
 });

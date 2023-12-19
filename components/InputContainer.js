@@ -24,24 +24,31 @@ export const InputContainer = ({ onButtonPress, visible, onCancel }) => {
 	return (
 		<Modal visible={visible} animationType='slide'>
 			<View style={styles.inputContainer}>
-				<Image style={styles.image} source={require('../assets/list.png')} />
+				<View style={styles.containerTop}>
+					<Text style={styles.text}>New List</Text>
+					<TouchableOpacity onPress={onCancel}>
+						<Image
+							style={styles.cross}
+							source={require('../assets/cross.png')}
+						/>
+					</TouchableOpacity>
+				</View>
 				<View style={styles.inputWrapper}>
 					<TextInput
+						multiline={true}
+						numberOfLines={6}
 						style={styles.input}
-						placeholder='Enter a List Item'
+						placeholder='Create a List'
 						placeholderTextColor='#264653'
 						onChangeText={inputHandler}
 						value={enteredText}
+						textAlignVertical='top'
 					/>
 				</View>
-				<View style={styles.buttonContainer}>
-					<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
-						<Text style={styles.buttonText}>Add</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={onCancel} style={styles.customButton}>
-						<Text style={styles.buttonText}>Cancel</Text>
-					</TouchableOpacity>
-				</View>
+
+				<TouchableOpacity onPress={buttonHandler} style={styles.customButton}>
+					<Text style={styles.buttonText}>Create</Text>
+				</TouchableOpacity>
 			</View>
 		</Modal>
 	);
@@ -49,34 +56,35 @@ export const InputContainer = ({ onButtonPress, visible, onCancel }) => {
 
 const styles = StyleSheet.create({
 	inputContainer: {
-		gap: 24,
 		flex: 2,
-		borderBottomWidth: 1,
-		borderBottomColor: 'grey',
-		justifyContent: 'center',
-		backgroundColor: '#2a9d8f',
+		justifyContent: 'space-between',
+		backgroundColor: 'whitesmoke',
+		paddingTop: 50,
 	},
 	inputWrapper: {
 		color: 'white',
-		backgroundColor: '#fefae0',
 		borderWidth: 2,
 		borderColor: 'grey',
 		padding: 20,
 		borderRadius: 6,
 		margin: 20,
 	},
+	containerTop: {
+		margin: 20,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
 	input: {
 		fontSize: 20,
-	},
-	image: {
-		width: 150,
-		height: 150,
-		margin: 'auto',
 	},
 	customButton: {
 		backgroundColor: '#264653',
 		padding: 10,
 		borderRadius: 5,
+		alignItems: 'center',
+		marginHorizontal: 20,
+		marginBottom: 40,
 	},
 	buttonText: {
 		color: 'white',
@@ -87,5 +95,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		gap: 24,
+	},
+	cross: {
+		width: 40,
+		height: 40,
+	},
+	text: {
+		fontSize: 36,
+		fontWeight: '700',
 	},
 });
