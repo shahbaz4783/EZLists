@@ -14,14 +14,16 @@ export const ListItem = ({ text, onDelete, index }) => {
 
 const styles = StyleSheet.create({
 	textContent: {
-		backgroundColor: 'blue',
+		borderColor: '#264653',
+		borderWidth: 1,
 		padding: 16,
 		borderRadius: 6,
 		fontSize: 18,
-		margin: 10,
+		marginVertical: 8,
 	},
 	text: {
-		color: 'white',
+		color: '#264653',
+		fontSize: 18,
 	},
 	pressedEffect: {
 		color: 'grey',
